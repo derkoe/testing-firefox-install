@@ -1,5 +1,6 @@
 name: Testing
-on: pull_request
+on: push:
+  branches: [main]
 
 env:
   MOZ_HEADLESS: true
