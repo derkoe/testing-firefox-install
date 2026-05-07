@@ -1,0 +1,15 @@
+name: Testing
+on: pull_request
+
+env:
+  MOZ_HEADLESS: true
+
+jobs:
+  build:
+    name: Testing
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Firefox
+        run: apt install -y firefox
