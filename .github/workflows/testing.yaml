@@ -5,6 +5,7 @@ on:
 
 env:
   MOZ_HEADLESS: true
+  GECKODRIVER_VERSION: v0.36.0
 
 jobs:
   build:
@@ -13,17 +14,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Setup Firefox
+      - name: Setup Geckodriver
+        run: |
+          wget https://github.com/mozilla/geckodriver/releases/download/${{ env.GECKODRIVER_VERSION }}/geckodriver-${{ env.GECKODRIVER_VERSION }}-linux64.tar.gz
+          tar -xvzf geckodriver-${{ env.GECKODRIVER_VERSION }}-linux64.tar.gz
+          sudo mv geckodriver /usr/local/bin/
+    
+      - name: Check Firefox
         run: |
           firefox --version
 
-      - name: Setup Geckodriver
+      - name: Check Geckodriver
         run: |
-          wget https://github.com/mozilla/geckodriver/releases/download/v0.30.0/geckodriver-v0.30.0-linux64.tar.gz
-          tar -xvzf geckodriver-v0.30.0-linux64.tar.gz
-          sudo mv geckodriver /usr/local/bin/
-    
-      - name: Check Firefox and Geckodriver
-        run: |
-          firefox --version
           geckodriver --version
