@@ -14,4 +14,6 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Setup Firefox
-        run: apt install -y firefox
+        run: |
+          sudo apt update
+          sudo apt install -y firefox
